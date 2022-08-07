@@ -1,70 +1,112 @@
-#include <stdio.h>
-void bubble_sort(int a[], int n) {
-    int i = 0, j = 0, tmp;
-    for (i = 0; i < n; i++) {   
-        for (j = 0; j < n - 1; j++) { 
-            if (a[j] > a[j + 1]) { 
-                tmp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = tmp;
-            }
+#include<stdio.h>
+void classic(int a[],int n)
+{
+        int i,j,k,temp;
+        int count=0;
+        for(i=0;i<n-1;i++)
+        {
+                for(j=0;j<n-1;j++)
+                {
+                        count++;
+                        if(a[j]>a[j+1]){
+                        temp=a[j];
+                        a[j]=a[j+1];
+                        a[j+1]=temp;
+                        }
+                for(k=0;k<n;k++)
+                        printf("%d",a[k]);
+                        printf("\n");
+
+
+                }
+
+
         }
-    }
+        printf("Comparisson Count is %d",count);
 }
-void bubble_sort_semi(int a[], int n) {
-    int i = 0, j = 0, tmp;
-    for (i = 0; i < n; i++) {   
-        for (j = 0; j < n - i - 1; j++) { 
-            if (a[j] > a[j + 1]) { 
-                tmp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = tmp;
-            }
+void semi_optimized(int a[],int n)
+{
+        int i,j,k,temp;
+        int count=0;
+        for(i=0;i<n-1;i++)
+        {
+                for(j=0;j<n-i-1;j++)
+                {
+                        count++;
+                        if(a[j]>a[j+1]){
+                        temp=a[j];
+                        a[j]=a[j+1];
+                        a[j+1]=temp;
+                }
+                for(k=0;k<n;k++)
+                        printf("%d",a[k]);
+                        printf("\n");
+                }
         }
-    }
+        printf("Comparisson Count Is: %d",count);
 }
-void bubble_sort_full(int a[], int n) {
-    int i = 0, j = 0, tmp;
-    int flag=0;
-    for (i = 0; i < n; i++) {   
-        for (j = 0; j < n - i - 1; j++) { 
-            if (a[j] > a[j + 1]) { 
-                tmp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = tmp;
-                flag=1;
-            }
+void optimized(int a[],int n)
+{
+        int i,j,k,temp;
+        int count=0;
+        int flag=0;
+        for(i=0;i<n-1;i++)
+        {
+                for(j=0;j<n-i-1;j++)
+                {
+                        count++;
+                        if(a[j]>a[j+1])
+                        {
+                        temp=a[j];
+                        a[j]=a[j+1];
+                        a[j+1]=temp;  
+			flag=1;
+                }
+                }
+
+                if(flag==0){
+                        break;
+                }
+                flag=0;
+
+                for(k=0;k<n;k++)
+                        printf("%d",a[k]);
+                        printf("\n");
         }
-        if(flag==0){
-            break;
+
+        printf("Comparisson Count is: %d",count);
         }
-    }
-    
+
+int main()
+{
+        int a[100],n;
+        int i,j;
+        int choice;
+        printf("Enter Number Of Elements to sort");
+        scanf("%d",&n);
+        printf("Enter Elements: \n");
+        for(i=0;i<n;i++)
+                scanf("%d",&a[i]);
+        printf("------------------Please Enter Your Choice-------------- \n 1.Classical Bubble Sort \n 2.Semi-Optimized Bubble Sort \n 3.Optimized Bubble Sort \n");
+        scanf("%d",&choice);
+        switch(choice){
+case 1:
+                classic(a,n);
+                for(i=0;i<n;i++)
+                        printf("\n Your Sorted List is %d \n",a[i]);
+                break;
+                case 2:
+                semi_optimized(a,n);
+                for(i=0;i<n;i++)
+                        printf("\n Your sorted list is %d \n",a[i]);
+                break;
+                case 3:
+                optimized(a,n);
+                for(i=0;i<n;i++)
+                        printf("\n Your Sorted List is %d \n",a[i]);
+                break;
+                default:
+                printf("Invalid choice");
+        }
 }
 
-
-int main() {
-    int a[100], n, i;
-    printf("Enter number of elements in the array:\n");
-    scanf("%d", &n); 
-    printf("Enter %d integers\n", n);
-    for (i = 0; i < n; i++)
-        scanf("%d", &a[i]);
-
-    printf("this is for normal bubblesort\n");    
-    bubble_sort(a, n);
-    for (i = 0; i < n; i++)
-        printf("%d\n", a[i]);
-
-    printf("this is for semi optimized bubblesort\n");    
-    bubble_sort_semi(a, n);
-    for (i = 0; i < n; i++)
-        printf("%d\n", a[i]);
-
-    printf("this is for fully optimized bubblesort\n");    
-    bubble_sort_full(a, n);  
-    for (i = 0; i < n; i++)
-        printf("%d\n", a[i]);
-
-    return 0;
-}
